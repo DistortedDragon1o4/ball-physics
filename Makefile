@@ -4,19 +4,19 @@ WDFLAGS = -lglfw3dll -lopengl32 -lwinpthread -static-libstdc++ -static-libgcc
 SRC = src/
 
 build: $(SRC)main.cpp
-	g++ $(CFLAGS) -o OpenGL $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad -I include $(LDFLAGS)
+	g++ $(CFLAGS) -o 2D\ Ball\ Physics $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad -I include $(LDFLAGS)
 
 install: build
-	cp OpenGL build
+	cp 2D\ Ball\ Physics build
 
 run: install
-	./build/OpenGL
+	./build/2D\ Ball\ Physics
 
 build-windows: $(SRC)main.cpp
-	x86_64-w64-mingw32-g++ $(CFLAGS) -o OpenGL.exe $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad_windows -I include/ $(WDFLAGS)
+	x86_64-w64-mingw32-g++ $(CFLAGS) -o 2D\ Ball\ Physics.exe $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad_windows -I include/ $(WDFLAGS)
 
 run-windows: build-windows
-	wine OpenGL.exe
+	wine 2D\ Ball\ Physics.exe
 
 clean:
 	rm -r build
