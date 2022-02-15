@@ -6,8 +6,9 @@ SRC = src/
 build: $(SRC)main.cpp
 	g++ $(CFLAGS) -o 2D\ Ball\ Physics $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad -I include $(LDFLAGS)
 
-install: build
-	cp 2D\ Ball\ Physics build
+install: clean build
+	mkdir build
+	mv 2D\ Ball\ Physics build
 
 run: install
 	./build/2D\ Ball\ Physics
@@ -20,4 +21,3 @@ run-windows: build-windows
 
 clean:
 	rm -r build
-	mkdir build
