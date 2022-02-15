@@ -21,7 +21,7 @@ You can download the executabled of GNU/Linux and Windows from the Github Releas
 
 Make sure your graphics drivers are up to date.
 
-Open a Terminal and run `./2D\ Ball\Physics` in the directory where you have kept it.
+Open a Terminal and run `./2D-Ball-Physics` in the directory where you have kept it.
 
 ### For Windows based systems:
 
