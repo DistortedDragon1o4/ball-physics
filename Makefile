@@ -13,7 +13,7 @@ run: install
 	./build/2D\ Ball\ Physics
 
 build-windows: $(SRC)main.cpp
-	x86_64-w64-mingw32-g++ $(CFLAGS) -o 2D\ Ball\ Physics.exe $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad_windows -I include/ $(WDFLAGS)
+	x86_64-w64-mingw32-g++ $(CFLAGS) -o 2D\ Ball\ Physics.exe $(SRC)main.cpp $(SRC)physics.cpp $(SRC)glad/glad_windows -I include $(WDFLAGS)
 
 run-windows: build-windows
 	wine 2D\ Ball\ Physics.exe

@@ -7,7 +7,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "include/physics.h"
+#include "physics.h"
 
 float red = 1;
 float green = 0;
