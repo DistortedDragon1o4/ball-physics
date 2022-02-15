@@ -12,6 +12,7 @@ This is for testing and experimentation only and I am not liable if you break an
 
 
 ![GitHub release](https://img.shields.io/github/release/DistortedDragon1o4/2D-Ball-Physics.svg)
+
 You can download the executabled of GNU/Linux and Windows from the Github Releases page.
 
 ## Running:
