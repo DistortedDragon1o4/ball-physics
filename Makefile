@@ -12,7 +12,6 @@ move:
 	mkdir build
 	mv 2D_Ball_Physics build
 	mv 2D_Ball_Physics.exe build
-	cp -r shaders build
 
 install:
 	echo "Installing is not supported"
