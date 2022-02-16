@@ -9,6 +9,7 @@
 
 #include "physics.h"
 
+
 float red = 1;
 float green = 0;
 float blue = 0;
@@ -110,9 +111,13 @@ int main() {
 	glViewport(0, 0, width, height);
 
 	//Shaders
-	std::string vertexCode = get_file_contents("shaders/shader.vert");
-	std::string fragmentCode = get_file_contents("shaders/shader.frag");
-
+	const std::string vertexCode = 
+	#include "ball_vertex.glsl"
+	;
+	const std::string fragmentCode = 
+	#include "ball_fragment.glsl"
+	;
+	
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();
 
