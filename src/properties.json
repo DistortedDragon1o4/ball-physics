@@ -1,0 +1,14 @@
+{
+    "mass": 0.5,
+    "PosX": 0.0,
+    "PosY": 0.0,
+    "gravityX": 0.0,
+    "gravityY": -0.000098,
+    "velocityX": 0.0,
+    "velocityY": 0.0,
+    "speed": 10,
+    "enablePointNormals": false,
+    "red": 1.0,
+    "green": 0.67,
+    "blue": 0.01
+}
