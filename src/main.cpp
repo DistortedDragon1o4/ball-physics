@@ -7,8 +7,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <fstream>
-#include <sstream>
-#include <string>
 
 #include "physics.h"
 #include "json.hpp"
@@ -77,6 +75,8 @@ void chooseColor() {
 int main() {
 	const int width = 700;
 	const int height = width;
+	
+	int autoPointNormals = 1;
 
 	makeCircle();
 
@@ -104,8 +104,10 @@ int main() {
 		physics.Pos.y = 0.0f;
 		physics.gravity.x = 0.0f;
 		physics.gravity.y = -0.000098f;
-		physics.velocity.x = 0.0f;
+		physics.velocity.x = 0.01f;
 		physics.velocity.y = 0.0f;
+		
+		physics.generateMesh();
 	} else {
 		std::stringstream s;
 		s << Properties.rdbuf();
@@ -126,16 +128,23 @@ int main() {
 		physics.velocity.x = properties.value("velocityX", 0.0f);
 		physics.velocity.y = properties.value("velocityY", 0.0f);
 		physics.enablePointNormals = properties.value("enablePointNormals", true);
+		autoPointNormals = properties.value("autoPointNormals", true);
+
+		nlohmann::json meshX = properties["meshX"];
+		nlohmann::json meshY = properties["meshY"];
+		for (int i = 0; i < meshX.size(); i++) {
+			physics.mesh.push_back(meshX.at(i));
+			physics.mesh.push_back(meshY.at(i));
+		}
 
 		color.x = properties.value("red", 1.0f);
 		color.y = properties.value("green", 0.67f);
 		color.z = properties.value("blue", 0.01f);
 	}
 
-	physics.enablePointNormals = 0;
-
-	physics.generateMesh();
 	physics.generateMeshPoints();
+	if (autoPointNormals == 1)
+		physics.autoPointNormals();
 	physics.generateNormals();
 
 	int iwidth, iheight, numColch;
@@ -154,14 +163,14 @@ int main() {
 		return EXIT_FAILURE;
 	}
 
-	GLFWimage favicon[1];
+	/*GLFWimage favicon[1];
 	stbi_uc* faviconImg = stbi_load("favicon.png", &iwidth, &iheight, &numColch, 0);
 	if (!faviconImg)
 		std::cout << "Favicon loading failed successfully\n";
 	favicon -> height = iheight;
 	favicon -> width = iwidth;
 	favicon[0].pixels = faviconImg;
-	glfwSetWindowIcon(window, 1, favicon);
+	glfwSetWindowIcon(window, 1, favicon);*/
 
 	glfwMakeContextCurrent(window);
 

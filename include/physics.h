@@ -31,9 +31,10 @@ public:
 	void generateMeshPoints();
 	void doPhysicsTick();
 	void generateNormals();
-	void fixClipping(int pointIndex);
+	void fixClipping(int pointIndex, bool point);
 	float getDistanceFromOBJ(int pointIndex);
 	float getLineDistance(int pointIndex);
+	void autoPointNormals();
 };
 
 #endif

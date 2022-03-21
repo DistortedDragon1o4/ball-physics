@@ -12,7 +12,7 @@ void Physics::doPhysicsTick() {
 	}
 	for (int i = 0; i < size(pointDistance); i++) {
 		if (distance.at(i) <= OBJ_RADIUS && enablePointNormals == 1) {
-			fixClipping(i);
+			fixClipping(i, 1);
 			//A lot of MATH
 			float resultantAngle = atan(resultant.y / resultant.x);
 			float normalAngle = atan(pointNormals.at(i).y / pointNormals.at(i).x);
@@ -37,7 +37,7 @@ void Physics::doPhysicsTick() {
 			float height = area * 2 / pointDistance.at(i);
 			float maxDist = sqrt(pow(pointDistance.at(i), 2) + pow(OBJ_RADIUS, 2));
 			if (height <= OBJ_RADIUS && dist1 < maxDist && dist2 < maxDist) {
-				fixClipping(i);
+				fixClipping(i, 0);
 				//A lot of MATH
 				float resultantAngle = atan(resultant.y / resultant.x);
 				float normalAngle = atan(normals.at(i).y / normals.at(i).x);
@@ -106,8 +106,12 @@ float Physics::getDistanceFromOBJ(int pointIndex) {
 	return distance;
 }
 
-void Physics::fixClipping(int pointIndex) {
-	glm::vec2 reverse = normals.at(pointIndex) * 0.00001f;
+void Physics::fixClipping(int pointIndex, bool point) {
+	glm::vec2 reverse;
+	if (point == 1)
+		reverse = pointNormals.at(pointIndex) * 0.00001f;
+	else
+		reverse = normals.at(pointIndex) * 0.00001f;
 	glm::vec2 actualPos;
 	actualPos.x = Pos.x;
 	actualPos.y = Pos.y;
@@ -142,4 +146,14 @@ void Physics::generateMesh() {
 		part.push_back(cos(currentAngle) * 0.9);
 		mesh.insert(mesh.end(), part.begin(), part.end());
 	}
+}
+
+void Physics::autoPointNormals() {
+	float sumDistance = 0;
+	for (int i = 0; i < size(points); i++) {
+		sumDistance += getLineDistance(i);
+	}
+	float avgDistance = sumDistance / size(points);
+	if (avgDistance <= OBJ_RADIUS)
+		enablePointNormals = 0;
 }
